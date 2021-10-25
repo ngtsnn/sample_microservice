@@ -1,0 +1,49 @@
+version: "3.3"
+
+services:
+  # DB:
+  #   image: keinos/sqlite3
+  #   restart: always
+  #   ports: 
+  #     - 1234:1234
+  #   networks:
+  #     - test
+  #   volumes: 
+  #     - ./db:/data/db
+
+  RS:
+    image: myrs
+    restart: always
+    build: 
+      context: ./RS
+    volumes: 
+      - ./RS:/usr/src/app
+    command: "uvicorn main:app --host 0.0.0.0 --port 80"
+    ports: 
+      - 80:80
+    networks:
+      - test
+
+  web:
+    image: web
+    restart: always
+    build: 
+      context: ./web
+    volumes: 
+      - ./web:/app
+    command: yarn dev
+    ports: 
+      - 8080:8080
+    networks:
+      - test
+    environment:
+      PORT: 8080
+      # DB: mongodb://Mongo/test
+      RSAPI: http://RS
+
+
+networks:
+  test:
+
+# volumes: 
+#   mongoStorage:
