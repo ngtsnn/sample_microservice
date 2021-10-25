@@ -35,16 +35,14 @@ This is the title of
 ```
  cd web
  npm -i
- cd..
+ cd ..
 ```
 
 ***3.2. If you prefer installing packages via yarn :***
 ```
- cd RS
- virtualenv packages
- source packages/bin/activate
- pip3 install requirements.txt
-
+ cd web
+ yarn
+ cd ..
 ```
 
 
