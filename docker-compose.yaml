@@ -31,7 +31,7 @@ services:
       context: ./web
     volumes: 
       - ./web:/app
-    command: yarn dev
+    command: sh -c "yarn && yarn dev"
     ports: 
       - 8080:8080
     networks:
